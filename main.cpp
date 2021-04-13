@@ -25,6 +25,8 @@ int main(int argc, char* argv[]) {
         token = strtok(NULL, " ");
         m = atoi(token);
 
+
+
         fclose(stream);
     }
     return 0;
