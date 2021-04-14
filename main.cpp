@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    char* graph = argv[1];      // gets name of text file
+    char* graph_file = argv[1];      // gets name of text file
     char* direction = argv[2];  // gets direction of the graph
     int n;                      // number of vertices
     int m;                      // number of edges
@@ -18,43 +18,61 @@ int main(int argc, char* argv[]) {
     int weight;                 // wight
 
     //read text file
-    FILE* stream = fopen(graph, "r");
+    FILE* stream = fopen(graph_file, "r");
 
-    if (stream != NULL) {
-        // gets values for n and m
+    // gets values for n and m
+    fgets(graph_ln, sizeof(graph_ln), stream);
+
+    // gets number of vertices n
+    char* token = strtok(graph_ln, " ");
+    n = atoi(token);
+
+    // gets number of edges m
+    token = strtok(NULL, " ");
+    m = atoi(token);
+
+    graph** graph_table = graphTableArray(n);
+
+    for (int i = 0; i < m; i++){
+        // gets values of the graph for each line
         fgets(graph_ln, sizeof(graph_ln), stream);
 
-        // gets number of vertices n
+        // gets edge ID
         char* token = strtok(graph_ln, " ");
-        n = atoi(token);
+        edge_ID = atoi(token);
 
-        // gets number of edges m
+        // gets vertex U
         token = strtok(NULL, " ");
-        m = atoi(token);
+        vertex_u = atoi(token);
 
-        for (int i = 0; i < m; i++){
-            // gets values of the graph for each line
-            fgets(graph_ln, sizeof(graph_ln), stream);
+        // gets vertex V
+        token = strtok(NULL, " ");
+        vertex_v = atoi(token);
 
-            // gets edge ID
-            char* token = strtok(graph_ln, " ");
-            edge_ID = atoi(token);
+        // gets vertex weight
+        token = strtok(NULL, " ");
+        weight = atoi(token);
 
-            // gets vertex U
-            token = strtok(NULL, " ");
-            vertex_u = atoi(token);
-
-            // gets vertex V
-            token = strtok(NULL, " ");
-            vertex_v = atoi(token);
-
-            // gets vertex weight
-            token = strtok(NULL, " ");
-            weight = atoi(token);
-
-            cout << edge_ID << ": " << vertex_u << " -> " << vertex_v << " of size " << weight << endl;
+        if (strcmp(direction,"directed")==0){
+            insertHT(n, graph_table, vertex_u-1, vertex_v-1, weight);
         }
-        fclose(stream);
+        else{
+            insertHT(n, graph_table, vertex_u-1, vertex_v-1, weight);
+            insertHT(n, graph_table, vertex_v-1, vertex_u-1, weight);
+        }
     }
+
+    for (int i = 0; i < n; i++){
+        graph* temp = graph_table[i];
+        while(temp != NULL){
+            cout << "(" << i+1 << "->" << temp->adjLists->vertex_v+1 << " of size " << temp->adjLists->weight << ") ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+
+    delete(graph_table);
+    freeHash(graph_table, n);
+    fclose(stream);
     return 0;
 }

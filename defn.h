@@ -9,11 +9,16 @@ struct node
 {
     int vertex_v;
     int weight;
-    struct node* next;
+
 };
 
-struct Graph
+struct graph
 {
-    int numVertices;
-    struct node** adjLists;
+    struct node* adjLists;
+    struct graph* next;
 };
+
+
+graph** graphTableArray(int n);
+void insertHT(int n, graph **t, int vertex_u, int vertex_v, int weight);
+void freeHash(graph** t, int n);
