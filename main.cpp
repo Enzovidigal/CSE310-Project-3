@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "defn.h"
+#include "adjlist.h"
 
 using namespace std;
 
@@ -54,11 +55,11 @@ int main(int argc, char* argv[]) {
         weight = atoi(token);
 
         if (strcmp(direction,"directed")==0){
-            insertHT(n, graph_table, vertex_u-1, vertex_v-1, weight);
+            insert(n, graph_table, vertex_u-1, vertex_v-1, weight);
         }
         else{
-            insertHT(n, graph_table, vertex_u-1, vertex_v-1, weight);
-            insertHT(n, graph_table, vertex_v-1, vertex_u-1, weight);
+            insert(n, graph_table, vertex_u-1, vertex_v-1, weight);
+            insert(n, graph_table, vertex_v-1, vertex_u-1, weight);
         }
     }
 

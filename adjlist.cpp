@@ -1,6 +1,7 @@
 #include <string.h>
 #include <iostream>
 #include "defn.h"
+#include "adjlist.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ graph** graphTableArray(int n){
 
 
 //inserts new node into hash table
-void insertHT(int n, graph **t, int vertex_u, int vertex_v, int weight){
+void insert(int n, graph **t, int vertex_u, int vertex_v, int weight){
 
     node* adjList = new node[sizeof(adjList)];
     adjList->vertex_v = vertex_v;

@@ -1,11 +1,11 @@
-dijkstra: main.o hash.o
-	g++ main.o hash.o -std=c++11 -o dijkstra
+dijkstra: main.o adjlist.o
+	g++ main.o adjlist.o -std=c++11 -o dijkstra
 
-main.o: main.cpp defn.h
+main.o: main.cpp defn.h adjlist.h
 	g++ main.cpp -c
 
-hash.o: hash.cc defn.h
-	g++ hash.cc defn.h -c
+adjlist.o: adjlist.cpp defn.h adjlist.h
+	g++ adjlist.cpp defn.h adjlist.h -c
 
 clean:
-	rm main.o hash.o
+	rm main.o adjlist.o
