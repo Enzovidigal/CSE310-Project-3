@@ -5,18 +5,21 @@
 
 using namespace std;
 
-struct node
+struct adjList
 {
+    int vertex_u;
     int vertex_v;
     int weight;
-
+    adjList* next;
 };
 
+/*
 struct graph
 {
     struct node* adjLists;
     struct graph* next;
 };
+ */
 
 
 
