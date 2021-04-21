@@ -1,3 +1,21 @@
-#include "defn.h"
+#include "adjlist.h"
 
-void initialise_single_source( graph** t , int n ){
+struct MinHeapNode
+{
+    int  v;
+    int dist;
+};
+
+struct MinHeap
+{
+    int size;
+    int *pos;
+    struct MinHeapNode **array;
+};
+
+void dijkstra(adjList** adjacencyList, int source, int n);
+void minHeapify(MinHeap* minHeap,int i);
+MinHeapNode* extractMin(MinHeap* minHeap);
+void decreaseKey(MinHeap* minHeap, int v, int dist);
+bool isInMinHeap(MinHeap *minHeap, int v);
+void printArr(int dist[], int n);

@@ -1,6 +1,12 @@
 //header file for adjlist.cpp
 
-#include "defn.h"
+struct adjList
+{
+    int vertex_u;
+    int vertex_v;
+    int weight;
+    adjList* next;
+};
 
 void graphTableArray(adjList** t, int n);
 void insert(int n, adjList **t, int vertex_u, int vertex_v, int weight);

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "adjlist.h"
+#include "minheap.h"
 
 using namespace std;
 
@@ -121,11 +121,10 @@ int main(int argc, char* argv[]) {
             else{
                 // if query is valid, then checks if destination is ∈ V
                 if (destination >= 1 && destination <= n){
-
+                    dijkstra(adjacencyList, source-1, n);
                 }
                 else{
-
-
+                    dijkstra(adjacencyList, source-1, n);
                 }
             }
         }
