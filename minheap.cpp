@@ -20,12 +20,12 @@ void minHeapify(MinHeap* minHeap, int i){
     //checks if min is at the root
     if (minimum != i)
     {
-        //swaps minimum node with root
-        swap(minHeap->array[i], minHeap->array[minimum]);
-
         //swaps positions
         minHeap->pos[minHeap->array[minimum]->v] = i;
         minHeap->pos[minHeap->array[i]->v] = minimum;
+
+        //swaps minimum node with root
+        swap(minHeap->array[i], minHeap->array[minimum]);
 
         minHeapify(minHeap, minimum);
     }
@@ -36,18 +36,14 @@ MinHeapNode* extractMin(MinHeap* minHeap){
     if (minHeap->size == 0)
         return NULL;
 
-    // Store the root node
     MinHeapNode* root = minHeap->array[0];
 
-    // Replace root node with last node
     MinHeapNode* lastNode = minHeap->array[minHeap->size - 1];
     minHeap->array[0] = lastNode;
 
-    // Update position of last node
     minHeap->pos[root->v] = minHeap->size-1;
     minHeap->pos[lastNode->v] = 0;
 
-    // Reduce heap size and heapify root
     minHeap->size = minHeap->size-1;
     minHeapify(minHeap, 0);
 
@@ -65,7 +61,7 @@ void decreaseKey(MinHeap* minHeap, int v, int dist){
     {
         minHeap->pos[minHeap->array[i]->v] =(i-1)/2;
         minHeap->pos[minHeap->array[(i-1)/2]->v] = i;
-        swap(minHeap->array[i], minHeap->array[(i - 1) / 2]);
+        swap(minHeap->array[i],minHeap->array[(i - 1) / 2]);
 
         i = (i - 1) / 2;
     }
@@ -78,7 +74,6 @@ void printArr(int dist[], int n){
         cout << i+1 << "\t\t" << dist[i] << endl;
     }
 }
-
 
 void dijkstra(adjList** adjacencyList, int src, int n){
     // dist values used to pick
@@ -107,7 +102,6 @@ void dijkstra(adjList** adjacencyList, int src, int n){
 
     // Make dist value of src vertex
     // as 0 so that it is extracted first
-
     MinHeapNode*  newNode = new MinHeapNode[sizeof(MinHeapNode)];
     newNode->v = src;
     newNode->dist = dist[src];
@@ -139,10 +133,8 @@ void dijkstra(adjList** adjacencyList, int src, int n){
             }
             temp = temp->next;
         }
-
     }
 
     // print the calculated shortest distances
     printArr(dist, n);
 }
-

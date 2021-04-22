@@ -17,5 +17,4 @@ void dijkstra(adjList** adjacencyList, int source, int n);
 void minHeapify(MinHeap* minHeap,int i);
 MinHeapNode* extractMin(MinHeap* minHeap);
 void decreaseKey(MinHeap* minHeap, int v, int dist);
-bool isInMinHeap(MinHeap *minHeap, int v);
 void printArr(int dist[], int n);
